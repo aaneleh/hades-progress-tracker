@@ -9,6 +9,7 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
+  --black: #151613; 
 }
 
 *{
@@ -17,8 +18,8 @@
 }
 
 body {
-  color: #151613;
-  background: no-repeat top center url(./assets/jpqyiulxi8a61.jpg), #000;
+  color: var(--black);
+  background: repeat-y top center url(./assets/jpqyiulxi8a61.jpg), #000;
   background-size: 100% auto;
 
   display: flex;
@@ -33,29 +34,102 @@ main {
   width: 85dvw;
   min-height: 95vh;
   min-height: 95dvh;
-  margin: 1em;
-  padding: 4em;
+  margin: 1em 1em 0;
+  padding: 4em 4em 1em;
   background-color: rgba(118, 100, 74, 0.75);
 }
 
 h1,h2,h3,h4,h5 {
   font-family: 'Alegreya Sans', sans-serif;
 }
+/* font-size: 5.653rem; */
 h1 {
-  font-size: 5.653rem;
-}
-h2{
   font-size: 3.998rem;
 }
-h3 {
+h2{
   font-size: 2.827rem;
 }
-h4 {
+h3 {
   font-size: 1.999rem;
 }
-p, details, summary {
+h4 {
   font-size: 1.414rem;
+}
+p, details, summary, label {
+  font-size: 1rem;
   font-family: 'Ubuntu', sans-serif;
+}
+summary {
+  cursor: pointer;
+}
+
+button {
+  color: white;
+  background: rgb(82, 82, 82);
+  display: grid;
+  place-items: center;
+  font-size: 1.4141em;
+  height: 1.4141em;
+  width: 1.4141em;
+  font-weight: 600;
+  border: 0.12em rgb(58, 58, 58) inset;  
+  border-radius: 0.25em;
+  outline: 0.12em rgb(146, 132, 132) solid;  
+  box-shadow: 0 0 0.12em 0.1em rgb(167, 53, 225);
+  cursor: pointer;
+}
+button[disabled]{
+  color: rgb(58, 58, 58);
+  box-shadow: 0 0 0 0 rgb(167, 53, 225);
+
+}
+
+.checkbox {
+  width: 1.5em;
+  height: 1.5em;
+  border: 1.5px solid var(--black);
+  border-radius: 0.12em;
+  outline: 3px inset #FFC701;
+/*   box-shadow: 0 0 0 4px var(--black); */
+  position: relative;
+  background-color: #A08A68;
+  background: transparent;
+  z-index: 10;
+  opacity: 1;
+}
+input[type='checkbox']{
+  width: 2em;
+  height: 2em;
+  opacity: 0;
+  position: relative;
+  z-index: 1000;
+  transform: scale(1.4);
+}
+.checkbox:after{
+  content: '';
+  background: #FFC701;
+  box-shadow: -0.5px 1px 1px 1px var(--black);
+  position: absolute;
+  border-radius: 100%;
+  z-index: 1000;
+  height: 0em;
+  width: 0em;
+  opacity: 0;
+  top: 50%;
+  left: 50%;
+  transform: translateY(-50%) translateX(-50%);
+  transition: all 100ms ease-in-out;
+  z-index: 10;
+}
+.checkbox:has(input[type='checkbox']:checked):after{
+  height: 0.75em;
+  width: 0.75em;
+  opacity: 1;
+}
+
+.underline {
+  text-decoration: underline;
+  cursor: pointer;
 }
 
 .title-header{
@@ -70,33 +144,43 @@ p, details, summary {
 }
 
 
-
-.progress-container {
-  margin: 4em;
-  padding: 2em;
+/***** PROGRESS CARDS *****/
+.progress-wrapper {
+  margin: 3em 2em 2em;
+  padding: 0 0 2em;
   display: grid;
   grid-template-rows: 10em;
   grid-template-columns: repeat(3, 28em);
-  column-gap: 8em;
+  column-gap: 6em;
   height: 100%;
   overflow-y: hidden;
   overflow-x: scroll;
 }
+.progress-card{
+  height: 4em;
+  padding: 1.75em 2em;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  border: 0.20em outset black;
+  border-radius: 1em;
+  background-color: rgba(117, 99, 74, 0.75);
+}
 .progress-container::-webkit-scrollbar {
   width: 1em;
-  height: 1em;
+  height: 0.5em;
 }
 .progress-container::-webkit-scrollbar-track {
   -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
 }
 .progress-container::-webkit-scrollbar-thumb {
-background-color: darkgrey;
-outline: 1px solid slategrey;
+  background-color: darkgrey;
+  outline: 1px solid slategrey;
 }
 .progress-bar {
   display: flex;
   flex-direction: row-reverse;
-  height: 1em;
+  height: 0.75em;
   width: 100%;
   border-radius: 1em;
   background: rgb(171,13,2);
@@ -112,4 +196,115 @@ outline: 1px solid slategrey;
   transform: rotateZ(45deg);
   top: -10em;
   right: -3em;
+}
+
+/***** PERSONAL TO-DO *****/
+.personal-todo-wrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 20em);
+  grid-template-rows: repeat(auto, 4em);
+  column-gap: 4em;
+  row-gap: 1em;
+  padding: 2em 0;
+}
+.personal-todo-card{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2em;
+  padding: 0.5em 1em ;
+  border: 0.20em outset var(--black);
+  border-radius: 1em;
+  background-color: rgba(117, 99, 74, 0.75);
+}
+.personal-todo-buttons{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 1em;
+}
+.personal-todo-card-add{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 2em;
+  padding: 0.5em 1em ;
+  text-align: center;
+  cursor: pointer;
+  border-radius: 1em;
+  background-color: rgba(117, 99, 74, 0.75);
+  box-shadow: 0 0 1px 0 var(--black);
+  transition: box-shadow 150ms;
+}
+.personal-todo-card-add:hover{
+  box-shadow: 0px 0px 7px 0px rgba(255,255,255,0.75);
+  -webkit-box-shadow: 0px 0px 7px 0px rgba(255,255,255,0.75);
+  -moz-box-shadow: 0px 0px 7px 0px rgba(255,255,255,0.75);
+}
+
+/***** RELATIONSHIPS *****/
+.relationships-wrapper{
+  display: inline-flex;
+  flex-direction: column;
+  gap: 2em;
+  width: 100%;
+  margin-top: 2em;
+}
+.relationships-card {
+  padding: 1em 2em;
+  background-color: rgba(117, 99, 74, 0.75);
+  border: 0.20em outset var(--black);
+  border-radius: 1em;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  gap: 1em;
+  height: fit-content;
+}
+.relationships-hearts {
+  display: inline-flex;
+  gap: 0.25em;
+  font-size: 1.9999em;
+  color: #525252;
+}
+.relationships-hearts * {
+  stroke: var(--black);
+  stroke-width: 1px;
+  overflow: visible;
+}
+.relationships-hearts .heart-filled {
+  color: #EF0C00;
+}
+
+/***** WEAPONS ASPECTS *****/
+.weapons {
+  margin-top: 2em;
+}
+.weapons-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+}
+.weapon-card {
+  background-color: rgba(117, 99, 74, 0.75);
+  border: 0.20em outset var(--black);
+  border-radius: 1em;
+  padding: 1em 2em 2em;
+  display: flex;
+  flex-direction: column;
+}
+.weapon-aspect {
+  display: inline-flex;
+  gap: 1em;
+  margin-top: 1em;
+}
+
+
+.footer {
+  margin-top: 4em;
 }
