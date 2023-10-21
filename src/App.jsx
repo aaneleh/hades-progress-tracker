@@ -1,19 +1,67 @@
 import { useState } from 'react'
-import { BsHeartFill } from 'react-icons/bs'
+import { BsHeartFill, BsLinkedin, BsGithub, BsGoogle } from 'react-icons/bs'
+import { RiTwitterXFill } from 'react-icons/ri'
 
 function App() {
 
-  const percentage = (10/20)*100;
+  const percentage = (10/20)*100
+
+  const dialogIsOpen = false 
 
   return (
-    <main>
-      <header className='title-header'>
-        <h1 className='title-font title-tracking'>HADES</h1>
-        <h4 className='title-font'>MONITOR DE PROGRESSO</h4>
-      </header>
+    <>
+      <dialog open={dialogIsOpen} className='config'>
+          <h3 className='config-text'>Marque para deixar visivel</h3>
+          <p className='config-text'>Seu progresso continuará salvo e você pode voltar a exibi-los mais tarde.</p>
+          <div className='config-wrapper'>
+
+            <div className='config-card'>
+              <div className="checkbox">
+                <input type="checkbox" checked={true} onChange={(e) => console.log(e.target.checked)} name="progress-bars" id="progress-bars" />
+              </div>                
+              <label htmlFor="progress-bars">Barras de progresso</label>
+            </div>
+
+            <div className='config-card'>
+              <div className="checkbox">
+                <input type="checkbox" checked={true} onChange={(e) => console.log(e.target.checked)} name="personal-todo" id="personal-todo" />
+              </div>                
+              <label htmlFor="personal-todo">Lista pessoal</label>
+            </div>
+
+            <div className='config-card'>
+              <div className="checkbox">
+                <input type="checkbox" checked={true} onChange={(e) => console.log(e.target.checked)} name="relationships" id="relationships" />
+              </div>                
+              <label htmlFor="relationships">Relacionamentos</label>
+            </div>
+
+            <div className='config-card'>
+              <div className="checkbox">
+                <input type="checkbox" checked={true} onChange={(e) => console.log(e.target.checked)} name="weapons" id="weapons" />
+              </div>                
+              <label htmlFor="weapons">Armas</label>
+            </div>
+          </div>
+
+          <div className="config-buttons">
+            <p className='clear-button' >Cancelar</p>
+            <button>
+              <p>
+                Salvar
+              </p>
+            </button>
+          </div>
+      </dialog>
+
+      <main className={dialogIsOpen ? 'blured' : ''}>
+        <header className='title-header'>
+          <h1 className='title-font title-tracking'>HADES</h1>
+          <h4 className='title-font'>MONITOR DE PROGRESSO</h4>
+        </header>
       
-      <p className='underline'>Esconder / exibir listas</p>
-        
+        <p className='clear-button'>Esconder / exibir listas</p>
+
         <section className='progress-wrapper'>
           <div className='progress-card'>
             <h3>
@@ -57,11 +105,11 @@ function App() {
                 Coletar nectar
               </h4>
               <div className='personal-todo-buttons'>
-                <button disabled={true}> - </button>
+                <button className='square-button' disabled={true}> - </button>
                 <h4>
                   <span> 0 </span> / <span> 5 </span>
                 </h4>
-                <button> + </button>
+                <button className='square-button' disabled={false}> + </button>
               </div>
             </div>
             <div className='personal-todo-card'>
@@ -69,11 +117,11 @@ function App() {
                 Coletar sangue
               </h4>
               <div className='personal-todo-buttons'>
-                <button disabled={true}> - </button>
+                <button className='square-button' disabled={true}> - </button>
                 <h4>
                   <span> 0 </span> / <span> 5 </span>
                 </h4>
-                <button> + </button>
+                <button className='square-button' disabled={false}> + </button>
               </div>
             </div>
             <div className='personal-todo-card-add'>
@@ -186,10 +234,35 @@ function App() {
         </section>
 
         <footer className='footer'>
-          {/* @todo creditos a mim, ao jogo, aos meus guias, e ao background */}
+          <div className="footer-social">
+            <a href="https://mail.google.com/mail/u/0/?fs=1&to=helenakurzgon@gmail.com&tf=cm"> {/* @todo adicionar links */}
+              <BsGoogle/>
+            </a>
+            <a href="https://github.com/aaneleh">
+              <BsGithub/>
+            </a>
+            <a href="https://www.linkedin.com/in/helena-kurz-1738a2256/">
+              <BsLinkedin/>
+            </a>
+            <a href="https://twitter.com/helena_kurzzz">
+              <RiTwitterXFill/>
+            </a>
+          </div>
+          <div className='footer-references'>
+            <p>
+              <a href="https://steamcommunity.com/sharedfiles/filedetails/?id=2238809372">Companheiro</a>
+            </p>
+            <p>
+            <a href="https://steamcommunity.com/sharedfiles/filedetails/?id=2248251083">Aspectos de armas</a>
+            </p>
+            <p>
+              <a href="https://www.reddit.com/media?url=https%3A%2F%2Fi.redd.it%2Fjpqyiulxi8a61.jpg">Imagem de fundo</a>
+            </p>
+          </div>
         </footer>
-
     </main>
+    </>
+    
   )
 }
 

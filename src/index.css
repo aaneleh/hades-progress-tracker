@@ -38,6 +38,9 @@ main {
   padding: 4em 4em 1em;
   background-color: rgba(118, 100, 74, 0.75);
 }
+main.blured {
+  filter: blur(5px);
+}
 
 h1,h2,h3,h4,h5 {
   font-family: 'Alegreya Sans', sans-serif;
@@ -63,25 +66,42 @@ summary {
   cursor: pointer;
 }
 
+.square-button {
+  font-size: 1.4141em;
+  height: 1.4141em;
+  width: 1.4141em;
+  padding: 0;
+}
 button {
   color: white;
   background: rgb(82, 82, 82);
   display: grid;
   place-items: center;
-  font-size: 1.4141em;
-  height: 1.4141em;
-  width: 1.4141em;
   font-weight: 600;
+  padding: 0.25em 0.5em;
   border: 0.12em rgb(58, 58, 58) inset;  
   border-radius: 0.25em;
   outline: 0.12em rgb(146, 132, 132) solid;  
   box-shadow: 0 0 0.12em 0.1em rgb(167, 53, 225);
   cursor: pointer;
+  transition: box-shadow 150ms;
 }
 button[disabled]{
   color: rgb(58, 58, 58);
   box-shadow: 0 0 0 0 rgb(167, 53, 225);
+}
+button:hover {
+  box-shadow: 0 0 0.12em 0.2em rgb(167, 53, 225);
+}
+button[disabled]:hover{
+  box-shadow: 0 0 0 0 rgb(167, 53, 225);
+}
 
+a {
+  color: currentColor;
+}
+a:hover{
+  color: rgba(171,13,2,1);
 }
 
 .checkbox {
@@ -104,6 +124,8 @@ input[type='checkbox']{
   position: relative;
   z-index: 1000;
   transform: scale(1.4);
+  cursor: pointer;
+
 }
 .checkbox:after{
   content: '';
@@ -127,7 +149,7 @@ input[type='checkbox']{
   opacity: 1;
 }
 
-.underline {
+.clear-button {
   text-decoration: underline;
   cursor: pointer;
 }
@@ -143,6 +165,39 @@ input[type='checkbox']{
   font-family: 'EB Garamond', serif;
 }
 
+/***** CONFIG DIALOG *****/
+.config {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -60%);
+  width: 30em;
+  max-width: 90vw;
+  max-width: 90dvw;
+  padding: 2em 4em;
+  z-index: 1000;
+  background: #9d8765;
+  -webkit-box-shadow: inset 0px 0px 96px -30px rgba(63,51,33,1);
+  -moz-box-shadow: inset 0px 0px 96px -25px rgba(63,51,33,1);
+  box-shadow: inset 0px 0px 96px -25px rgba(63,51,33,1);  
+}
+.config-wrapper{
+  margin-top: 1em;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+.config-card, .config-buttons {
+  display: inline-flex;
+  gap: 1em;
+  margin-top: 1em;
+}
+.config-text, .config-buttons{
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
 
 /***** PROGRESS CARDS *****/
 .progress-wrapper {
@@ -242,9 +297,9 @@ input[type='checkbox']{
   transition: box-shadow 150ms;
 }
 .personal-todo-card-add:hover{
-  box-shadow: 0px 0px 7px 0px rgba(255,255,255,0.75);
-  -webkit-box-shadow: 0px 0px 7px 0px rgba(255,255,255,0.75);
-  -moz-box-shadow: 0px 0px 7px 0px rgba(255,255,255,0.75);
+  box-shadow: 0px 0px 7px 0px rgba(255,255,255,0.25);
+  -webkit-box-shadow: 0px 0px 7px 0px rgba(255,255,255,0.25);
+  -moz-box-shadow: 0px 0px 7px 0px rgba(255,255,255,0.25);
 }
 
 /***** RELATIONSHIPS *****/
@@ -304,7 +359,40 @@ input[type='checkbox']{
   margin-top: 1em;
 }
 
-
+/***** FOOTER *****/
 .footer {
-  margin-top: 4em;
+  margin: 4em 0 2em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2em;
+}
+.footer-social {
+  display: inline-flex;
+  justify-content: center;
+  gap: 1em;
+  font-size: 1.4141em;
+  position: relative;
+  top: 3px;
+}
+.footer-references {
+  display: flex;
+  flex-direction: row;
+  gap: 1em;
+}
+@media screen and (max-width: 800px) {
+  .footer-references {
+    display: block;
+  }
+  .footer {
+    margin-top: 4em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1em;
+    text-align: center;
+    line-height: 2em;
+    
+  }
 }
