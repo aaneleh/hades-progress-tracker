@@ -7,17 +7,17 @@ function App() {
   const [progress, setProgress ] = useState([
     {
       name: 'Lembrancinhas',
-      currentNumber: 23,
+      currentNumber: 0,
       maxNumber: 25
     },
     {
       name: 'Companheiros',
-      currentNumber: 1,
+      currentNumber: 0,
       maxNumber: 6
     },
     {
       name: 'Armas',
-      currentNumber: 15,
+      currentNumber: 0,
       maxNumber: 20
     },
   ])
@@ -128,7 +128,7 @@ function App() {
       howToUnlock: "Demeter's heart is unlocked after completing the Epilogue and upon talking to her in subsequent runs."
     },
     {
-      name: "Persefone",
+      name: "[REDACTED]",
       hearts: 0,
       hasCompanion: false,
       howToUnlock: "After beating the game (post-credits), continue to talk to Persephone after each run when she is back at the House of Hades."
@@ -293,13 +293,18 @@ function App() {
 
   //Atualiza states
   const setHearts = (godName, hearts) => {
-    if(hearts == 1) {
-      //atualiza lembrancinhas
-    } else if(hearts == 7){
-      //atualiza companheiros
-    }
     const newRelationships = relationships.map(el => {
       if(el.name == godName){
+        if(el.hearts == 0 && hearts > 0){
+          updateProgress('Lembrancinhas', 1)
+        } else if(el.hearts >= 1 && hearts == 0){
+          updateProgress('Lembrancinhas', -1)
+        }
+        if(el.hasCompanion && el.hearts < 7 && hearts == 7){
+          updateProgress('Companheiros', 1)
+        } else if(el.hasCompanion && el.hearts == 7 && hearts < 7){
+          updateProgress('Companheiros', -1)
+        } 
         el.hearts = hearts
       }
       return el
@@ -320,6 +325,19 @@ function App() {
     })
     setWeapons(newWeapons)
   }
+  const updateProgress = (name, quant) => {
+    const newProgress = progress.map(el => {
+      if(el.name == name){
+        if(el.currentNumber + quant >= el.maxNumber) {
+          el.currentNumber = el.maxNumber
+        }else if(el.currentNumber + quant <= 0) {
+          el.currentNumber = 0
+        } else el.currentNumber += quant
+      }
+      return el
+    })
+    setProgress(newProgress)
+  }
   const updateConfig = (e) => {
     setConfigs((prev) => {
       return {
@@ -329,22 +347,45 @@ function App() {
     })
   }
 
-  //Salvando e buscando dados no localStorage
+  //Atualizando dados
+  const checkProgress = () => {
+    const newProgress = progress.map(el => {
+      if(el.name == 'Lembrancinhas'){
+        el.currentNumber = 0
+        relationships.map((rel) => {
+          if(rel.hearts > 0) el.currentNumber++
+        })
+      } else if(el.name == 'Companheiros'){
+        el.currentNumber = 0
+        relationships.map((rel) => {
+          if(rel.hearts == 7 && rel.hasCompanion) el.currentNumber++
+        })
+      } else if(el.name == 'Armas'){
+
+      }
+      return el
+    })
+    setProgress(newProgress)
+  }
   const updateStorage = (item, data) => {
     localStorage.setItem(item, JSON.stringify(data))
   }
   window.addEventListener("beforeunload", (ev) => {
       ev.preventDefault()
-/*       alert('aaaa') */
+      /* alert('aaaa') */
+      checkProgress()
+      updateStorage('progress', progress)
       updateStorage('configs', configs)
       updateStorage('relationships', relationships)
       updateStorage('weapons', weapons)
   })
   useEffect(() => {
+    const LocalProgress = localStorage.getItem("progress")
     const LocalConfig = localStorage.getItem("configs")
     const LocalRelationships = localStorage.getItem("relationships")
     const LocalWeapons = localStorage.getItem("weapons")
 
+    if(LocalProgress != null) setProgress(JSON.parse(LocalProgress))
     if(LocalConfig != null) setConfigs(JSON.parse(LocalConfig))
     if(LocalRelationships != null) setRelationships(JSON.parse(LocalRelationships))
     if(LocalWeapons != null) setWeapons(JSON.parse(LocalWeapons))
@@ -402,12 +443,6 @@ function App() {
         <div className='header-with-configs'>
           <div>
             <p className='clear-button' onClick={() => setDialog(true)}>Esconder / exibir listas</p>
-          </div>
-          <div>
-            <label htmlFor="progress-bars">Já escapou?</label>
-            <div className="checkbox">
-                <input type="checkbox" checked={true} onChange={(e) => console.log(e.target.checked)} name="progress-bars" id="progress-bars" />
-            </div>                
           </div>
         </div>
 
