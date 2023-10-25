@@ -166,6 +166,15 @@ input[type='checkbox']{
 }
 
 /***** CONFIG DIALOG *****/
+.header-with-configs{
+  display: flex;
+  justify-content: space-between;
+  padding: 0 2em 2em;
+}
+.header-with-configs div{
+  display: flex;
+  gap: 1em;
+}
 .config {
   position: fixed;
   top: 50%;
