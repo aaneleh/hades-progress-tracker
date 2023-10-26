@@ -361,6 +361,15 @@ function App() {
       }
     })
   }
+  const addTask = () => {
+    setTodoList( (prev) => [...prev, newTask] )
+    setNewTask({
+      task: '',
+      currentNumber: 0,
+      maxNumber: 0
+    })
+    setTodoListDialog(false) 
+  }
   const updateTask = (task, value) => {
     const updatedTodoList = todoList.map(el => {
       if(el.task == task){
@@ -480,14 +489,14 @@ function App() {
           <form className='dialog-wrapper' onSubmit={(e) => e.preventDefault()}>
             <div className='dialog-todo-card'>
               <label htmlFor="progress-bars">Tarefa:</label>
-              <input type="text"  onChange={(e) => updateNewTask((e))}  name="task" />
+              <input type="text"  onChange={(e) => updateNewTask((e))}  name="task" value={newTask.task}/>
             </div>
             <div className='dialog-todo-card'>
               <label htmlFor="progress-bars">Quantidade:</label>
-              <input type="number" onChange={(e) => updateNewTask((e))}  name="maxNumber" />
+              <input type="number" onChange={(e) => updateNewTask((e))}  name="maxNumber" value={newTask.maxNumber}/>
             </div>
             <div className='dialog-buttons'>
-              <button className='red-button' onClick={() => {setTodoList( (prev) => [...prev, newTask] ); setTodoListDialog(false) } }  >
+              <button className='red-button' onClick={() => addTask() }  >
                 <h4>
                   Adicionar
                 </h4>
