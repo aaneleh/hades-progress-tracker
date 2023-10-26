@@ -34,151 +34,151 @@ function App() {
       name: "Hades",
       hearts: 0,
       hasCompanion: false,
-      howToUnlock: "Complete the base game (post-credits)."
+      howToUnlock: "Completar o jogo 10 vezes."
     },
     {
-      name: "Nyx",
+      name: "Nix",
       hearts: 0,
       hasCompanion: false,
-      howToUnlock: "Talking to Chaos and Nyx enough times so that Nyx mentions attempting to reconnect with Chaos. You must have Administrative Chamber access. talking to Chaos and Nyx enough times so that Nyx mentions attempting to reconnect with Chaos. Then purchase the Work Order to restore the Eldest Sigil, for 3142 Darkness"
+      howToUnlock: "Conversar com Caos e Nyx, até que Nyx mencione reconectar com Caos. Então, na câmara administrativa, restaure o Eldest Sigil, por 3142 de Escuridão"
     },
     {
-      name: "Charon",
+      name: "Caronte",
       hearts: 0,
       hasCompanion: false,
-      howToUnlock: "Spend at least 10,000 gold in his shops"
+      howToUnlock: "Gaste ao menos 10.000 na sua loja"
     },
     {
-      name: "Hypnos",
+      name: "Hipnos",
       hearts: 0,
       hasCompanion: false,
-      howToUnlock: "Talk to both Hypnos and Thanatos (while both are in the House of Hades) enough times to progress the storyline of improving Hypnos’ work ethic/ability."
+      howToUnlock: "Converse com Hipnos e Tânato (enquanto ambos estão na casa) o suficiente para progredir a história de melhorar a ética de trabalho do Hipnos."
     },
     {
-      name: "Thanatos",
+      name: "Tânato",
       hearts: 0,
       hasCompanion: true,
-      howToUnlock: "After getting to the locked heart, beat (or tie) Thanatos during one of his “Death Approaches” unique encounter in a run."
+      howToUnlock: "Depois de conseguir 6 corações, vença ou empate com Tânato em uma de seus competições"
     },
     {
-      name: "Megaera",
+      name: "Megaira",
       hearts: 0,
       hasCompanion: true,
-      howToUnlock: "Once you encounter Megaera enough times while escaping Tartarus, a cutscene will appear where Megaera will talk to Zagreus in his room. After the second of such cutscenes, the heart should unlock."
+      howToUnlock: "Depois de encontrar com Megaira vezes suficientes enquanto escapando, aguarde acontecer duas cutscene de Megaira e Zagreu conversando em seu quarto."
     },
     {
-      name: "Chaos",
+      name: "Caos",
       hearts: 0,
       hasCompanion: false,
-      howToUnlock: "Talking to Chaos and Nyx enough times so that Nyx mentions attempting to reconnect with Chaos. You must have Administrative Chamber access. talking to Chaos and Nyx enough times so that Nyx mentions attempting to reconnect with Chaos. Then purchase the Work Order to restore the Eldest Sigil, for 3142 Darkness"
+      howToUnlock: "Conversar com Caos e Nix, até que Nix mencione reconectar com Caos. Então, na câmara administrativa, restaure o Eldest Sigil, por 3142 de Escuridão"
     },
     {
       name: "Zeus",
       hearts: 0,
       hasCompanion: false,
-      howToUnlock: "Requires you to hear at least 5 other gods’ opinions about him. Likely to happen when getting boons from Zeus and others gods in the same run."
+      howToUnlock: "Converse sobre Zeus com ao menos outros 5 deuses, normalmente quando obtendo benção dele e então de outro deus na mesma tentativa de fuga."
     },
     {
       name: "Poseidon",
       hearts: 0,
       hasCompanion: false,
-      howToUnlock: "Acquire the Rod of Fishing (unlocked reaching the final boss), then catch at least 18 fish in total."
+      howToUnlock: "Adquira a vara de pesca (desbloqueada depois de chegar no ultimo chefão) e então pegue ao menos 18 peixes."
     },
     {
-      name: "Athena",
+      name: "Atena",
       hearts: 0,
       hasCompanion: false,
-      howToUnlock: "Requires you to hear 3 unique congratulatory lines from Athena, upon completing a successful run."
+      howToUnlock: "Ouvir 3 falas de parabéns de Atena, após completar uma fuga."
     },
     {
-      name: "Aphrodite",
+      name: "Afrodite",
       hearts: 0,
       hasCompanion: false,
-      howToUnlock: "Complete all three romanceable characters’ storylines: Thanatos, Megaera, Dusa."
+      howToUnlock: "Complete a história de Tânatos, Megaira e Dusa."
     },
     {
-      name: "Artemis",
+      name: "Ártemis",
       hearts: 0,
       hasCompanion: false,
-      howToUnlock: "Talk to Artemis enough times to progress through her dialogue regarding her hunting-partner, Callisto."
+      howToUnlock: "Converse com Áretemis o suficiente para progredir seu dialogo sobre Callisto."
     },
     {
       name: "Ares",
       hearts: 0,
       hasCompanion: false,
-      howToUnlock: "Complete the “War-God’s Bloodlust” prophecy (slay at least 10,000 enemies total across your runs), unlocked after slaing atleast 2000 enemies."
+      howToUnlock: "Complete a proferia War-God’s Bloodlust (debloqueia após matar 2000 inimigos e requer matar 10.000)."
     },
     {
       name: "Dionísio",
       hearts: 0,
       hasCompanion: false,
-      howToUnlock: "Gift Ambrosia to at least 6 different characters, with a total of at least 10 Ambrosia gifted total."
+      howToUnlock: "Dê 10 Ambrosia para ao menos 6 diferentes personagens."
     },
     {
       name: "Hermes",
       hearts: 0,
       hasCompanion: false,
-      howToUnlock: "Talk to Hermes with a fully upgraded (three-star) Lambent Plume, which is his keepsake."
+      howToUnlock: "Converse com Hermes com um Lambent Plume (sua lembrancinhas) totalmente melhorada (3 estrelas)."
     },
     {
-      name: "Demeter",
+      name: "Deméter",
       hearts: 0,
       hasCompanion: false,
-      howToUnlock: "Demeter's heart is unlocked after completing the Epilogue and upon talking to her in subsequent runs."
+      howToUnlock: "Completar o Epilogo e então conversar com Deméter."
     },
     {
       name: "[REDACTED]",
       hearts: 0,
       hasCompanion: false,
-      howToUnlock: "After beating the game (post-credits), continue to talk to Persephone after each run when she is back at the House of Hades."
+      howToUnlock: "Finalizar o jogo 10 vezes e continuar falando com Perséfone na casa de Hades."
     },
     {
-      name: "Achilles",
+      name: "Aquiles",
       hearts: 0,
       hasCompanion: true,
-      howToUnlock:  "Talk to Achilles and Patroclus enough times for Patroclus to mention a code phrase, afterwards, purchase the contract binding Achilles to the House of Hades, also make sure to talk to Nyx enough times. Upon seeing them together in Elysium, the heart for Achilles is unlocked."
+      howToUnlock:  "Fale com Aquiles e Pátroclo o suficiente para Pátroclo mencionar um código, então compre o contrato de Aquiles (também necessário falar com Nix). E converse com eles juntos no Elysium."
     },
     {
-      name: "Orpheus",
+      name: "Orfeu",
       hearts: 0,
       hasCompanion: false,
-      howToUnlock:  "After talking to Orpheus and Eurydice (separately) enough times and hearing their implied longing to see one another, Zagreus can purchase the contract binding Orpheus to the House of Hades. Upon seeing them together in Asphodel, the heart for Orpheus is unlocked."
+      howToUnlock:  "Fale com Orfeu e Eurídice o suficiente para ouvir a saudade de ambos. Então compre o contrato de Orfeu e converse com eles juntos em Asphodel."
     },
     {
-      name: "Sisyphus",
+      name: "Sísifo",
       hearts: 0,
       hasCompanion: true,
-      howToUnlock:  "After encountering Sisyphus enough times in Tartarus, Zagreus will mention attempting to lighten Sisyphus’ punishment. Then talk to Hades and Megaera enough times to get their opinions on Sisyphus' punishment and make sure to talk to Bouldy (the big rock/boulder next to Sisyphus). The next time you meet Sisyphus in Tartarus, the heart for Sisyphus is unlocked."
+      howToUnlock:  "Após Zagreu mencionar querer aliviar a punição de Sísifo, fale com Hades, Megaira e Bouldy (a pedra de Sisifo) até saber suas opniões sobre sua punição. Então converse novamente com Sísifo."
     },
     {
-      name: "Euridice",
+      name: "Eurídice",
       hearts: 0,
       hasCompanion: false,
-      howToUnlock:  "After talking to Orpheus and Eurydice (separately) enough times and hearing their implied longing to see one another, Zagreus can purchase the contract binding Orpheus to the House of Hades. Upon seeing them together in Asphodel, the heart for Orpheus is unlocked."
+      howToUnlock:  "Fale com Orfreu e Euridice o suficiente para ouvir a saudade de ambos. Então compre o contrato de Orfreu e converse com eles juntos em Asphodel."
     },
     {
-      name: "Patroclus",
+      name: "Pátroclo",
       hearts: 0,
       hasCompanion: false,
-      howToUnlock:  "Talk to Achilles and Patroclus enough times for Patroclus to mention a code phrase, afterwards, purchase the contract binding Achilles to the House of Hades, also make sure to talk to Nyx enough times. Upon seeing them together in Elysium, the heart for Achilles is unlocked."
+      howToUnlock:  "Fale com Aquiles e Pátroclo o suficiente para Pátroclo mencionar um código, então compre o contrato de Aquiles (também necessário falar com Nix). E converse com eles juntos no Elysium."
     },
     {
-      name: "Cerberus",
+      name: "Cérbero",
       hearts: 0,
       hasCompanion: false,
-      howToUnlock:  "Pet Cerberus at least 20 times."
+      howToUnlock:  "Acaricie Cérbero ao menos 20 vezes."
     },
     {
       name: "Dusa",
       hearts: 0,
       hasCompanion: true,
-      howToUnlock:  "Complete the “A Place of Revelry” prophecy, unlocked by talking to Dusa enought times. To complete the prophecy, purchase a minimum of 12 Lounge Upgrades (including at least one rug for the Lounge), in addition to the work order which cleans up the mess made by Cerberus."
+      howToUnlock:  "Complete a profecia A Place of Revelry (desbloqueada conversando com Dusa), que requer comprar 12 melhorias do lounge (incluindo ao menos um tapete) e limpar a sujeira de Cérbero."
     },
     {
-      name: "Skelly",
+      name: "Zé Caveira",
       hearts: 0,
       hasCompanion: true,
-      howToUnlock:  "Complete the “Eternal Rest” prophecy, unlocked by unlock 4 aspects which are NOT the 'Aspect of Zagreus' of any weapons, then 'kill' Skelly with a Level 5 Aspect of Zagreus Stygian Blade (sword)."
+      howToUnlock:  "Completar a profecia Eternal Rest, que requer desbloquear 4 aspectos que não sejam de Zagreu e matar Zé Caveira com a Espada de Zagreu nível 5."
     },
   ])
   const [weapons, setWeapons] = useState([
@@ -191,7 +191,7 @@ function App() {
         },
         {
           aspectName: 'Aspecto de Nemesis',
-          unlocked: true
+          unlocked: false
         },
         {
           aspectName: 'Aspecto de Poseidon',
@@ -208,11 +208,11 @@ function App() {
       aspects: [
         {
           aspectName: 'Aspecto de Zagreu',
-          unlocked: true
+          unlocked: false
         },
         {
           aspectName: 'Aspecto de Aquiles',
-          unlocked: true
+          unlocked: false
         },
         {
           aspectName: 'Aspecto de Hades',
@@ -229,11 +229,11 @@ function App() {
       aspects: [
         {
           aspectName: 'Aspecto de Zagreu',
-          unlocked: true
+          unlocked: false
         },
         {
           aspectName: 'Aspecto de Chaos',
-          unlocked: true
+          unlocked: false
         },
         {
           aspectName: 'Aspecto de Zeus',
@@ -250,11 +250,11 @@ function App() {
       aspects: [
         {
           aspectName: 'Aspecto de Zagreu',
-          unlocked: true
+          unlocked: false
         },
         {
           aspectName: 'Aspecto de Chiron',
-          unlocked: true
+          unlocked: false
         },
         {
           aspectName: 'Aspecto de Hera',
@@ -271,11 +271,11 @@ function App() {
       aspects: [
         {
           aspectName: 'Aspecto de Zagreu',
-          unlocked: true
+          unlocked: false
         },
         {
           aspectName: 'Aspecto de Talos',
-          unlocked: true
+          unlocked: false
         },
         {
           aspectName: 'Aspecto de Demeter',
