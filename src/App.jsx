@@ -22,7 +22,6 @@ function App() {
     },
   ])
   const [todoList, setTodoList] = useState([
-    /* @todo ainda ñ feito */
   ]) 
   const [configs, setConfigs] = useState({
     progress: true,
@@ -289,9 +288,23 @@ function App() {
       ]
     },
   ])
-  const [dialogIsOpen, setDialog] = useState(false) 
+  const [configsDialogIsOpen, setConfigsDialogIsOpen] = useState(false) 
+  const [todoListDialog, setTodoListDialog] = useState(false)
 
-  //Atualiza states
+  const [ newTask, setNewTask ] = useState({
+    task: '',
+    currentNumber: 0,
+    maxNumber: 0
+  })
+  const updateNewTask = (e) => {
+    setNewTask((original) => {
+      return {
+          ...original,
+          [e.target.name]: e.target.value
+      }
+  })
+  }
+
   const setHearts = (godName, hearts) => {
     const newRelationships = relationships.map(el => {
       if(el.name == godName){
@@ -317,6 +330,8 @@ function App() {
         el.aspects.map(asp => {
           if(asp.aspectName == aspect) {
             asp.unlocked = value
+            if(value) updateProgress('Armas', 1)
+            else updateProgress('Armas', -1)
             return el
           }
         })
@@ -346,8 +361,27 @@ function App() {
       }
     })
   }
-
-  //Atualizando dados
+  const updateTask = (task, value) => {
+    const updatedTodoList = todoList.map(el => {
+      if(el.task == task){
+        el.currentNumber += value
+        console.log(task, el.currentNumber)
+        if(el.currentNumber <= 0) {
+          el.currentNumber = 0
+        } else if(el.currentNumber >= parseInt(el.maxNumber)){
+          el.currentNumber = parseInt(el.maxNumber)
+        }
+      }
+      return el
+    })
+    setTodoList(updatedTodoList)
+  }
+  const deleteTask = (index) => {
+    setTodoList([
+      ...todoList.splice(0, index), 
+      ...todoList.splice(index+1, todoList.length)
+    ])
+  }
   const checkProgress = () => {
     const newProgress = progress.map(el => {
       if(el.name == 'Lembrancinhas'){
@@ -361,7 +395,12 @@ function App() {
           if(rel.hearts == 7 && rel.hasCompanion) el.currentNumber++
         })
       } else if(el.name == 'Armas'){
-
+        el.currentNumber = 0
+        weapons.map((wep) => {
+          wep.aspects.map((asp) => {
+            if(asp.unlocked) el.currentNumber ++
+          })
+        })
       }
       return el
     })
@@ -378,48 +417,51 @@ function App() {
       updateStorage('configs', configs)
       updateStorage('relationships', relationships)
       updateStorage('weapons', weapons)
+      updateStorage('todoList', todoList)
   })
   useEffect(() => {
     const LocalProgress = localStorage.getItem("progress")
     const LocalConfig = localStorage.getItem("configs")
     const LocalRelationships = localStorage.getItem("relationships")
     const LocalWeapons = localStorage.getItem("weapons")
+    const LocalTodoList = localStorage.getItem("todoList")
 
     if(LocalProgress != null) setProgress(JSON.parse(LocalProgress))
     if(LocalConfig != null) setConfigs(JSON.parse(LocalConfig))
     if(LocalRelationships != null) setRelationships(JSON.parse(LocalRelationships))
     if(LocalWeapons != null) setWeapons(JSON.parse(LocalWeapons))
+    if(LocalTodoList != null) setTodoList(JSON.parse(LocalTodoList))
   }, [])
 
   return (
     <>
-      <dialog open={dialogIsOpen} className='config'>
-          <h3 className='config-text'>Marque para deixar visivel</h3>
-          <p className='config-text'>Seu progresso continuará salvo e você pode voltar a exibi-los mais tarde.</p>
-          <div className='config-wrapper'>
+      <dialog open={configsDialogIsOpen} className='dialog'>
+          <h3 className='dialog-text'>Marque para deixar visivel</h3>
+          <p className='dialog-text'>Seu progresso continuará salvo e você pode voltar a exibi-los mais tarde.</p>
+          <div className='dialog-wrapper'>
 
-            <div className='config-card'>
+            <div className='dialog-card'>
               <div className="checkbox">
                 <input type="checkbox" checked={configs.progress}  onChange={(e) => updateConfig((e))}  name="progress" />
               </div>                
               <label htmlFor="progress-bars">Barras de progresso</label>
             </div>
 
-            <div className='config-card'>
+            <div className='dialog-card'>
               <div className="checkbox">
                 <input type="checkbox" checked={configs.personalTodo} onChange={(e) => updateConfig((e))} name="personalTodo" />
               </div>                
               <label htmlFor="personal-todo">Lista pessoal</label>
             </div>
 
-            <div className='config-card'>
+            <div className='dialog-card'>
               <div className="checkbox">
                 <input type="checkbox" checked={configs.relationships} onChange={(e) => updateConfig((e))}  name="relationships" />
               </div>                
               <label htmlFor="relationships">Relacionamentos</label>
             </div>
 
-            <div className='config-card'>
+            <div className='dialog-card'>
               <div className="checkbox">
                 <input type="checkbox" checked={configs.weapons} onChange={(e) => updateConfig((e))}  name="weapons" />
               </div>                
@@ -427,23 +469,46 @@ function App() {
             </div>
           </div>
 
-          <div className="config-buttons">
-            <button onClick={() => setDialog(false)}>
+          <div className="dialog-buttons">
+            <button onClick={() => setConfigsDialogIsOpen(false)}>
+              <p> Voltar </p>
+            </button>
+          </div>
+      </dialog>
+      <dialog  open={todoListDialog} className='dialog'>
+          <h3 className='dialog-text'>Adicionando nova tarefa</h3>
+          <form className='dialog-wrapper' onSubmit={(e) => e.preventDefault()}>
+            <div className='dialog-todo-card'>
+              <label htmlFor="progress-bars">Tarefa:</label>
+              <input type="text"  onChange={(e) => updateNewTask((e))}  name="task" />
+            </div>
+            <div className='dialog-todo-card'>
+              <label htmlFor="progress-bars">Quantidade:</label>
+              <input type="number" onChange={(e) => updateNewTask((e))}  name="maxNumber" />
+            </div>
+            <div className='dialog-buttons'>
+              <button className='red-button' onClick={() => {setTodoList( (prev) => [...prev, newTask] ); setTodoListDialog(false) } }  >
+                <h4>
+                  Adicionar
+                </h4>
+              </button>
+            </div>
+          </form>
+          <div className="dialog-buttons">
+            <button onClick={() => setTodoListDialog(false)}>
               <p> Voltar </p>
             </button>
           </div>
       </dialog>
 
-      <main className={dialogIsOpen ? 'blured' : ''}>
+      <main className={(configsDialogIsOpen || todoListDialog) ? 'blured' : ''}>
         <header className='title-header'>
           <h1 className='title-font title-tracking'>HADES</h1>
           <h4 className='title-font'>MONITOR DE PROGRESSO</h4>
         </header>
       
         <div className='header-with-configs'>
-          <div>
-            <p className='clear-button' onClick={() => setDialog(true)}>Esconder / exibir listas</p>
-          </div>
+          <p className='clear-button' onClick={() => setConfigsDialogIsOpen(true)}>Esconder / exibir listas</p>
         </div>
 
         <section className='progress-wrapper' style={{ visibility: `${configs.progress ? "visible" : "hidden"} `, position: `${configs.progress ? "relative" : "absolute"} `}}>
@@ -468,31 +533,32 @@ function App() {
             <h2>Lista Pessoal</h2>
           </header>
           <div className='personal-todo-wrapper'>
-            <div className='personal-todo-card'>
-              <h4>
-                Coletar nectar
-              </h4>
-              <div className='personal-todo-buttons'>
-                <button className='square-button' disabled={true}> - </button>
-                <h4>
-                  <span> 0 </span> / <span> 5 </span>
-                </h4>
-                <button className='square-button' disabled={false}> + </button>
-              </div>
-            </div>
-            <div className='personal-todo-card'>
-              <h4>
-                Coletar sangue
-              </h4>
-              <div className='personal-todo-buttons'>
-                <button className='square-button' disabled={true}> - </button>
-                <h4>
-                  <span> 0 </span> / <span> 5 </span>
-                </h4>
-                <button className='square-button' disabled={false}> + </button>
-              </div>
-            </div>
-            <div className='personal-todo-card-add'>
+            {
+              todoList.length > 0 || todoList.includes(null) ? 
+                todoList.map((value, index) => {
+                  return <div className='personal-todo-card' key={index}>
+                    <p className='personal-todo-x' onClick={() => deleteTask(index)}>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-slash-circle" viewBox="0 0 16 16">
+                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                        <path d="M11.354 4.646a.5.5 0 0 0-.708 0l-6 6a.5.5 0 0 0 .708.708l6-6a.5.5 0 0 0 0-.708z"/>
+                      </svg>
+                    </p>
+                    <h4 className={`personal-todo-text ${value.currentNumber == value.maxNumber ? "completed" : "" }`}>
+                      {value.task}
+                    </h4>
+                    <div className='personal-todo-buttons'>
+                      <button className='square-button' disabled={value.currentNumber == 0} onClick={() => updateTask(value.task, -1)}> - </button>
+                      <h4>
+                        <span> {value.currentNumber} </span> / <span> {value.maxNumber} </span>
+                      </h4>
+                      <button className='square-button' disabled={value.currentNumber >= value.maxNumber}  onClick={() => updateTask(value.task, 1) }> + </button>
+                    </div>
+                  </div>
+                })
+              :
+                <></>
+            }
+            <div className='personal-todo-card-add' onClick={() => setTodoListDialog(true)}>
                 <h4> + </h4>
             </div>
           </div>
@@ -538,7 +604,7 @@ function App() {
                       <div className="checkbox">
                         <input type="checkbox" checked={aspect.unlocked} onChange={(e) => setWeaponUnlocked(value.name, aspect.aspectName, e.target.checked)} name="stygius_zagreus" id="stygius_zagreus" />
                       </div>                
-                      <label htmlFor={aspect.aspectName.toLowerCase().replaceAll(' ', '_').replaceAll('????', 'redacted') + "_" + i}>{aspect.aspectName}</label>
+                      <label className={aspect.unlocked ? 'completed' : ''} htmlFor={aspect.aspectName.toLowerCase().replaceAll(' ', '_').replaceAll('????', 'redacted') + "_" + i}>{aspect.aspectName}</label>
                     </div>
                   })}
                   
@@ -577,7 +643,6 @@ function App() {
         </footer>
       </main>
     </>
-    
   )
 }
 
