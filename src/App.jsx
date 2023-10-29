@@ -198,7 +198,7 @@ function App() {
           unlocked: false
         },
         {
-          aspectName: 'Aspecto de ????',
+          aspectName: 'Aspecto de Arthur',
           unlocked: false
         },
       ]
@@ -219,7 +219,7 @@ function App() {
           unlocked: false
         },
         {
-          aspectName: 'Aspecto de ????',
+          aspectName: 'Aspecto de Guan Yu',
           unlocked: false
         },
       ]
@@ -240,7 +240,7 @@ function App() {
           unlocked: false
         },
         {
-          aspectName: 'Aspecto de ????',
+          aspectName: 'Aspecto de Beowulf',
           unlocked: false
         },
       ]
@@ -261,7 +261,7 @@ function App() {
           unlocked: false
         },
         {
-          aspectName: 'Aspecto de ????',
+          aspectName: 'Aspecto de Rama',
           unlocked: false
         },
       ]
@@ -282,7 +282,28 @@ function App() {
           unlocked: false
         },
         {
-          aspectName: 'Aspecto de ????',
+          aspectName: 'Aspecto de Gilgamesh',
+          unlockeded: false
+        },
+      ]
+    },
+    {
+      name: 'Exagryph: O trilho de diamante',
+      aspects: [
+        {
+          aspectName: 'Aspecto de Zagreu',
+          unlocked: false
+        },
+        {
+          aspectName: 'Aspecto de Eris',
+          unlocked: false
+        },
+        {
+          aspectName: 'Aspecto de Hestia',
+          unlocked: false
+        },
+        {
+          aspectName: 'Aspecto de Lucifer',
           unlockeded: false
         },
       ]
@@ -291,6 +312,8 @@ function App() {
   const [configsDialogIsOpen, setConfigsDialogIsOpen] = useState(false) 
   const [todoListDialog, setTodoListDialog] = useState(false)
 
+  const [reset, setReset] = useState(false)
+  
   const [ newTask, setNewTask ] = useState({
     task: '',
     currentNumber: 0,
@@ -391,6 +414,8 @@ function App() {
       ...todoList.splice(index+1, todoList.length)
     ])
   }
+
+
   const checkProgress = () => {
     const newProgress = progress.map(el => {
       if(el.name == 'Lembrancinhas'){
@@ -419,14 +444,25 @@ function App() {
     localStorage.setItem(item, JSON.stringify(data))
   }
   window.addEventListener("beforeunload", (ev) => {
-      ev.preventDefault()
-      /* alert('aaaa') */
+    ev.preventDefault()
+    /* alert('aaaa') */
+    /* @todo reset */
+    if(reset) {
+      localStorage.setItem('progress', null)
+      localStorage.setItem('configs', null)
+      localStorage.setItem('relationships', null)
+      localStorage.setItem('weapons', null)
+      localStorage.setItem('todoList', null)
+    } else {
       checkProgress()
       updateStorage('progress', progress)
+      updateStorage('reset', reset)
       updateStorage('configs', configs)
       updateStorage('relationships', relationships)
       updateStorage('weapons', weapons)
       updateStorage('todoList', todoList)
+    }
+    alert(LocalProgress[0].name)
   })
   useEffect(() => {
     const LocalProgress = localStorage.getItem("progress")
@@ -434,6 +470,7 @@ function App() {
     const LocalRelationships = localStorage.getItem("relationships")
     const LocalWeapons = localStorage.getItem("weapons")
     const LocalTodoList = localStorage.getItem("todoList")
+    console.log(LocalProgress)
 
     if(LocalProgress != null) setProgress(JSON.parse(LocalProgress))
     if(LocalConfig != null) setConfigs(JSON.parse(LocalConfig))
@@ -613,7 +650,7 @@ function App() {
                       <div className="checkbox">
                         <input type="checkbox" checked={aspect.unlocked} onChange={(e) => setWeaponUnlocked(value.name, aspect.aspectName, e.target.checked)} name="stygius_zagreus" id="stygius_zagreus" />
                       </div>                
-                      <label className={aspect.unlocked ? 'completed' : ''} htmlFor={aspect.aspectName.toLowerCase().replaceAll(' ', '_').replaceAll('????', 'redacted') + "_" + i}>{aspect.aspectName}</label>
+                      <label className={aspect.unlocked ? 'completed' : ''} htmlFor={aspect.aspectName}>  {aspect.unlocked || j < 3 ? aspect.aspectName : '????'}</label>
                     </div>
                   })}
                   
@@ -650,6 +687,9 @@ function App() {
             </p>
           </div>
         </footer>
+        <div className="reset">
+          <p onClick={() => { setReset(true); location.reload()}}>Resetar dados</p>
+        </div>
       </main>
     </>
   )
