@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react'
 import { BsHeartFill, BsLinkedin, BsGithub, BsGoogle } from 'react-icons/bs'
 import { RiTwitterXFill } from 'react-icons/ri'
+import jsonRelationships from './assets/relationships.json'
+import jsonWeapons from './assets/weapons.json'
 
 function App() {
-
   const [progress, setProgress ] = useState([
     {
       name: 'Lembrancinhas',
@@ -18,307 +19,31 @@ function App() {
     {
       name: 'Armas',
       currentNumber: 0,
-      maxNumber: 20
+      maxNumber: 24
     },
   ])
-  const [todoList, setTodoList] = useState([
-  ]) 
   const [configs, setConfigs] = useState({
     progress: true,
     personalTodo: true,
     relationships: true,
     weapons: true,
   })
-  const [relationships, setRelationships] = useState([
-    {
-      name: "Hades",
-      hearts: 0,
-      hasCompanion: false,
-      howToUnlock: "Completar o jogo 10 vezes."
-    },
-    {
-      name: "Nix",
-      hearts: 0,
-      hasCompanion: false,
-      howToUnlock: "Conversar com Caos e Nyx, até que Nyx mencione reconectar com Caos. Então, na câmara administrativa, restaure o Eldest Sigil, por 3142 de Escuridão"
-    },
-    {
-      name: "Caronte",
-      hearts: 0,
-      hasCompanion: false,
-      howToUnlock: "Gaste ao menos 10.000 na sua loja"
-    },
-    {
-      name: "Hipnos",
-      hearts: 0,
-      hasCompanion: false,
-      howToUnlock: "Converse com Hipnos e Tânato (enquanto ambos estão na casa) o suficiente para progredir a história de melhorar a ética de trabalho do Hipnos."
-    },
-    {
-      name: "Tânato",
-      hearts: 0,
-      hasCompanion: true,
-      howToUnlock: "Depois de conseguir 6 corações, vença ou empate com Tânato em uma de seus competições"
-    },
-    {
-      name: "Megaira",
-      hearts: 0,
-      hasCompanion: true,
-      howToUnlock: "Depois de encontrar com Megaira vezes suficientes enquanto escapando, aguarde acontecer duas cutscene de Megaira e Zagreu conversando em seu quarto."
-    },
-    {
-      name: "Caos",
-      hearts: 0,
-      hasCompanion: false,
-      howToUnlock: "Conversar com Caos e Nix, até que Nix mencione reconectar com Caos. Então, na câmara administrativa, restaure o Eldest Sigil, por 3142 de Escuridão"
-    },
-    {
-      name: "Zeus",
-      hearts: 0,
-      hasCompanion: false,
-      howToUnlock: "Converse sobre Zeus com ao menos outros 5 deuses, normalmente quando obtendo benção dele e então de outro deus na mesma tentativa de fuga."
-    },
-    {
-      name: "Poseidon",
-      hearts: 0,
-      hasCompanion: false,
-      howToUnlock: "Adquira a vara de pesca (desbloqueada depois de chegar no ultimo chefão) e então pegue ao menos 18 peixes."
-    },
-    {
-      name: "Atena",
-      hearts: 0,
-      hasCompanion: false,
-      howToUnlock: "Ouvir 3 falas de parabéns de Atena, após completar uma fuga."
-    },
-    {
-      name: "Afrodite",
-      hearts: 0,
-      hasCompanion: false,
-      howToUnlock: "Complete a história de Tânatos, Megaira e Dusa."
-    },
-    {
-      name: "Ártemis",
-      hearts: 0,
-      hasCompanion: false,
-      howToUnlock: "Converse com Áretemis o suficiente para progredir seu dialogo sobre Callisto."
-    },
-    {
-      name: "Ares",
-      hearts: 0,
-      hasCompanion: false,
-      howToUnlock: "Complete a proferia War-God’s Bloodlust (debloqueia após matar 2000 inimigos e requer matar 10.000)."
-    },
-    {
-      name: "Dionísio",
-      hearts: 0,
-      hasCompanion: false,
-      howToUnlock: "Dê 10 Ambrosia para ao menos 6 diferentes personagens."
-    },
-    {
-      name: "Hermes",
-      hearts: 0,
-      hasCompanion: false,
-      howToUnlock: "Converse com Hermes com um Lambent Plume (sua lembrancinhas) totalmente melhorada (3 estrelas)."
-    },
-    {
-      name: "Deméter",
-      hearts: 0,
-      hasCompanion: false,
-      howToUnlock: "Completar o Epilogo e então conversar com Deméter."
-    },
-    {
-      name: "[REDACTED]",
-      hearts: 0,
-      hasCompanion: false,
-      howToUnlock: "Finalizar o jogo 10 vezes e continuar falando com Perséfone na casa de Hades."
-    },
-    {
-      name: "Aquiles",
-      hearts: 0,
-      hasCompanion: true,
-      howToUnlock:  "Fale com Aquiles e Pátroclo o suficiente para Pátroclo mencionar um código, então compre o contrato de Aquiles (também necessário falar com Nix). E converse com eles juntos no Elysium."
-    },
-    {
-      name: "Orfeu",
-      hearts: 0,
-      hasCompanion: false,
-      howToUnlock:  "Fale com Orfeu e Eurídice o suficiente para ouvir a saudade de ambos. Então compre o contrato de Orfeu e converse com eles juntos em Asphodel."
-    },
-    {
-      name: "Sísifo",
-      hearts: 0,
-      hasCompanion: true,
-      howToUnlock:  "Após Zagreu mencionar querer aliviar a punição de Sísifo, fale com Hades, Megaira e Bouldy (a pedra de Sisifo) até saber suas opniões sobre sua punição. Então converse novamente com Sísifo."
-    },
-    {
-      name: "Eurídice",
-      hearts: 0,
-      hasCompanion: false,
-      howToUnlock:  "Fale com Orfreu e Euridice o suficiente para ouvir a saudade de ambos. Então compre o contrato de Orfreu e converse com eles juntos em Asphodel."
-    },
-    {
-      name: "Pátroclo",
-      hearts: 0,
-      hasCompanion: false,
-      howToUnlock:  "Fale com Aquiles e Pátroclo o suficiente para Pátroclo mencionar um código, então compre o contrato de Aquiles (também necessário falar com Nix). E converse com eles juntos no Elysium."
-    },
-    {
-      name: "Cérbero",
-      hearts: 0,
-      hasCompanion: false,
-      howToUnlock:  "Acaricie Cérbero ao menos 20 vezes."
-    },
-    {
-      name: "Dusa",
-      hearts: 0,
-      hasCompanion: true,
-      howToUnlock:  "Complete a profecia A Place of Revelry (desbloqueada conversando com Dusa), que requer comprar 12 melhorias do lounge (incluindo ao menos um tapete) e limpar a sujeira de Cérbero."
-    },
-    {
-      name: "Zé Caveira",
-      hearts: 0,
-      hasCompanion: true,
-      howToUnlock:  "Completar a profecia Eternal Rest, que requer desbloquear 4 aspectos que não sejam de Zagreu e matar Zé Caveira com a Espada de Zagreu nível 5."
-    },
-  ])
-  const [weapons, setWeapons] = useState([
-    {
-      name: 'Stygius: A lâmina do submundo',
-      aspects: [
-        {
-          aspectName: 'Aspecto de Zagreu',
-          unlocked: true
-        },
-        {
-          aspectName: 'Aspecto de Nemesis',
-          unlocked: false
-        },
-        {
-          aspectName: 'Aspecto de Poseidon',
-          unlocked: false
-        },
-        {
-          aspectName: 'Aspecto de Arthur',
-          unlocked: false
-        },
-      ]
-    },
-    {
-      name: 'Varatha: A lança eterna',
-      aspects: [
-        {
-          aspectName: 'Aspecto de Zagreu',
-          unlocked: false
-        },
-        {
-          aspectName: 'Aspecto de Aquiles',
-          unlocked: false
-        },
-        {
-          aspectName: 'Aspecto de Hades',
-          unlocked: false
-        },
-        {
-          aspectName: 'Aspecto de Guan Yu',
-          unlocked: false
-        },
-      ]
-    },
-    {
-      name: 'Aegis: o escudo do caos',
-      aspects: [
-        {
-          aspectName: 'Aspecto de Zagreu',
-          unlocked: false
-        },
-        {
-          aspectName: 'Aspecto de Chaos',
-          unlocked: false
-        },
-        {
-          aspectName: 'Aspecto de Zeus',
-          unlocked: false
-        },
-        {
-          aspectName: 'Aspecto de Beowulf',
-          unlocked: false
-        },
-      ]
-    },
-    {
-      name: 'Coronacht: A arco que busca o coração',
-      aspects: [
-        {
-          aspectName: 'Aspecto de Zagreu',
-          unlocked: false
-        },
-        {
-          aspectName: 'Aspecto de Chiron',
-          unlocked: false
-        },
-        {
-          aspectName: 'Aspecto de Hera',
-          unlocked: false
-        },
-        {
-          aspectName: 'Aspecto de Rama',
-          unlocked: false
-        },
-      ]
-    },
-    {
-      name: 'Malphon: Os punhos gêmeos',
-      aspects: [
-        {
-          aspectName: 'Aspecto de Zagreu',
-          unlocked: false
-        },
-        {
-          aspectName: 'Aspecto de Talos',
-          unlocked: false
-        },
-        {
-          aspectName: 'Aspecto de Demeter',
-          unlocked: false
-        },
-        {
-          aspectName: 'Aspecto de Gilgamesh',
-          unlockeded: false
-        },
-      ]
-    },
-    {
-      name: 'Exagryph: O trilho de diamante',
-      aspects: [
-        {
-          aspectName: 'Aspecto de Zagreu',
-          unlocked: false
-        },
-        {
-          aspectName: 'Aspecto de Eris',
-          unlocked: false
-        },
-        {
-          aspectName: 'Aspecto de Hestia',
-          unlocked: false
-        },
-        {
-          aspectName: 'Aspecto de Lucifer',
-          unlockeded: false
-        },
-      ]
-    },
-  ])
-  const [configsDialogIsOpen, setConfigsDialogIsOpen] = useState(false) 
-  const [todoListDialog, setTodoListDialog] = useState(false)
-
-  const [reset, setReset] = useState(false)
+  const [relationships, setRelationships] = useState([])
+  const [weapons, setWeapons] = useState([])
   
+  //PERSONAL TODO LIST 
+  const [todoList, setTodoList] = useState([]) 
   const [ newTask, setNewTask ] = useState({
     task: '',
     currentNumber: 0,
     maxNumber: 0
   })
+
+  //DIALOGS
+  const [configsDialogIsOpen, setConfigsDialogIsOpen] = useState(false) 
+  const [todoListDialog, setTodoListDialog] = useState(false)
+
+  //ACTIONS
   const updateNewTask = (e) => {
     setNewTask((original) => {
       return {
@@ -327,7 +52,6 @@ function App() {
       }
   })
   }
-
   const setHearts = (godName, hearts) => {
     const newRelationships = relationships.map(el => {
       if(el.name == godName){
@@ -415,7 +139,45 @@ function App() {
     ])
   }
 
+  //RESETS ALL TO DEFAULT VALUES
+  const reset = () => {
+    if(!confirm('Você tem certeza que deseja excluir todo seu progresso?')) return
 
+    weapons.map(wep => 
+        wep.aspects.map(asp => {
+          if(asp.unlocked) 
+            setWeaponUnlocked(wep.name, asp.aspectName, false)
+        })
+    )
+    setRelationships(jsonRelationships)
+    //setWeapons(jsonWeapons)
+    setTodoList([])
+    setConfigs({
+      progress: true,
+      personalTodo: true,
+      relationships: true,
+      weapons: true,
+    })
+    setProgress([
+      {
+        name: 'Lembrancinhas',
+        currentNumber: 0,
+        maxNumber: 25
+      },
+      {
+        name: 'Companheiros',
+        currentNumber: 0,
+        maxNumber: 6
+      },
+      {
+        name: 'Armas',
+        currentNumber: 0,
+        maxNumber: 24
+      },
+    ])
+  }
+
+  //BEFORE UNLOAD SAFE ALL DATA IN LOCALSTORAGE
   const checkProgress = () => {
     const newProgress = progress.map(el => {
       if(el.name == 'Lembrancinhas'){
@@ -445,38 +207,30 @@ function App() {
   }
   window.addEventListener("beforeunload", (ev) => {
     ev.preventDefault()
-    /* alert('aaaa') */
-    /* @todo reset */
-    if(reset) {
-      localStorage.setItem('progress', null)
-      localStorage.setItem('configs', null)
-      localStorage.setItem('relationships', null)
-      localStorage.setItem('weapons', null)
-      localStorage.setItem('todoList', null)
-    } else {
-      checkProgress()
-      updateStorage('progress', progress)
-      updateStorage('reset', reset)
-      updateStorage('configs', configs)
-      updateStorage('relationships', relationships)
-      updateStorage('weapons', weapons)
-      updateStorage('todoList', todoList)
-    }
-    alert(LocalProgress[0].name)
+    checkProgress()
+    updateStorage('progress', progress)
+    updateStorage('reset', reset)
+    updateStorage('configs', configs)
+    updateStorage('relationships', relationships)
+    updateStorage('weapons', weapons)
+    updateStorage('todoList', todoList)
   })
+
+  //CHECK FOR DATA IN LOCALSTORAGE, IF DOESNT EXISTS GET FROM JSON OR KEEP DEFAULT
   useEffect(() => {
     const LocalProgress = localStorage.getItem("progress")
     const LocalConfig = localStorage.getItem("configs")
     const LocalRelationships = localStorage.getItem("relationships")
     const LocalWeapons = localStorage.getItem("weapons")
     const LocalTodoList = localStorage.getItem("todoList")
-    console.log(LocalProgress)
 
     if(LocalProgress != null) setProgress(JSON.parse(LocalProgress))
     if(LocalConfig != null) setConfigs(JSON.parse(LocalConfig))
-    if(LocalRelationships != null) setRelationships(JSON.parse(LocalRelationships))
-    if(LocalWeapons != null) setWeapons(JSON.parse(LocalWeapons))
     if(LocalTodoList != null) setTodoList(JSON.parse(LocalTodoList))
+    if(LocalRelationships != null) setRelationships(JSON.parse(LocalRelationships))
+      else setRelationships(jsonRelationships)
+    if(LocalWeapons != null) setWeapons(JSON.parse(LocalWeapons))
+      else setWeapons(jsonWeapons)
   }, [])
 
   return (
@@ -688,7 +442,7 @@ function App() {
           </div>
         </footer>
         <div className="reset">
-          <p onClick={() => { setReset(true); location.reload()}}>Resetar dados</p>
+          <p onClick={() => { reset() }}>Resetar dados</p>
         </div>
       </main>
     </>

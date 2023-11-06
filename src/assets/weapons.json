@@ -1,0 +1,128 @@
+[
+    {
+      "name": "Stygius: A lâmina do submundo",
+      "aspects": [
+        {
+          "aspectName": "Aspecto de Zagreu",
+          "unlock": true
+        },
+        {
+          "aspectName": "Aspecto de Nemesis",
+          "unlock": false
+        },
+        {
+          "aspectName": "Aspecto de Poseidon",
+          "unlock": false
+        },
+        {
+          "aspectName": "Aspecto de Arthur",
+          "unlock": false
+        }
+      ]
+    },
+    {
+      "name": "Varatha: A lança eterna",
+      "aspects": [
+        {
+          "aspectName": "Aspecto de Zagreu",
+          "unlock": false
+        },
+        {
+          "aspectName": "Aspecto de Aquiles",
+          "unlock": false
+        },
+        {
+          "aspectName": "Aspecto de Hades",
+          "unlock": false
+        },
+        {
+          "aspectName": "Aspecto de Guan Yu",
+          "unlock": false
+        }
+      ]
+    },
+    {
+      "name": "Aegis: o escudo do caos",
+      "aspects": [
+        {
+          "aspectName": "Aspecto de Zagreu",
+          "unlock": false
+        },
+        {
+          "aspectName": "Aspecto de Chaos",
+          "unlock": false
+        },
+        {
+          "aspectName": "Aspecto de Zeus",
+          "unlock": false
+        },
+        {
+          "aspectName": "Aspecto de Beowulf",
+          "unlock": false
+        }
+      ]
+    },
+    {
+      "name": "Coronacht: A arco que busca o coração",
+      "aspects": [
+        {
+          "aspectName": "Aspecto de Zagreu",
+          "unlock": false
+        },
+        {
+          "aspectName": "Aspecto de Chiron",
+          "unlock": false
+        },
+        {
+          "aspectName": "Aspecto de Hera",
+          "unlock": false
+        },
+        {
+          "aspectName": "Aspecto de Rama",
+          "unlock": false
+        }
+      ]
+    },
+    {
+      "name": "Malphon: Os punhos gêmeos",
+      "aspects": [
+        {
+          "aspectName": "Aspecto de Zagreu",
+          "unlock": false
+        },
+        {
+          "aspectName": "Aspecto de Talos",
+          "unlock": false
+        },
+        {
+          "aspectName": "Aspecto de Demeter",
+          "unlock": false
+        },
+        {
+          "aspectName": "Aspecto de Gilgamesh",
+          "unlock": false
+        }
+      ]
+    },
+    {
+      "name": "Exagryph: O trilho de diamante",
+      "aspects": [
+        {
+          "aspectName": "Aspecto de Zagreu",
+          "unlock": false
+        },
+        {
+          "aspectName": "Aspecto de Eris",
+          "unlock": false
+        },
+        {
+          "aspectName": "Aspecto de Hestia",
+          "unlock": false
+        },
+        {
+          "aspectName": "Aspecto de Lucifer",
+          "unlock": false
+        }
+      ]
+    }
+  ]

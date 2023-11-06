@@ -457,4 +457,5 @@ svg{
   justify-content: center;
   text-decoration: underline;
   cursor: pointer;
+  padding-bottom: 2em;
 }
