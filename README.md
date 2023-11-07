@@ -6,3 +6,12 @@
 
 Single-page app visando monitar o que fazer em seguida e o que ainda precisa ser feito para completar o jogo Hades.  
 Feito pois desejo monitorar melhor meu proprio progresso e gostaria de uma experiencia visualmente mais organizada e também compartilhar com quem gostar da ideia.  
+
+### Moodboard
+
+![Moodboard](moodboard.png)
+
+
+### Sketch 
+
+![Sketch](sketch.png)
